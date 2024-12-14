@@ -8,8 +8,12 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#ifdef __APPLE__
+#include <glad/glad.h>
+#else
 #define GLEW_STATIC
 #include "GL/glew.h"	// Important - this header must come before glfw3 header
+#endif
 #include "GLFW/glfw3.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
@@ -174,6 +178,15 @@ bool initOpenGL()
 	// Make the window's context the current one
 	glfwMakeContextCurrent(gWindow);
 
+	#ifdef __APPLE__
+    // glad: load all OpenGL function pointers
+    // ---------------------------------------
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    {
+        std::cerr << "Failed to initialize GLAD" << std::endl;
+        return false;
+    }	
+	#else
 	// Initialize GLEW
 	glewExperimental = GL_TRUE;
 	if (glewInit() != GLEW_OK)
@@ -181,6 +194,8 @@ bool initOpenGL()
 		std::cerr << "Failed to initialize GLEW" << std::endl;
 		return false;
 	}
+	#endif
+
 
 	// Set the required callback functions
 	glfwSetKeyCallback(gWindow, glfw_onKey);

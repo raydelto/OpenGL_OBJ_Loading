@@ -6,8 +6,12 @@
 //-----------------------------------------------------------------------------
 #pragma once
 
+#ifdef __APPLE__
+#include <glad/glad.h>
+#else
 #define GLEW_STATIC
-#include "GL/glew.h"
+#include "GL/glew.h"	// Important - this header must come before glfw3 header
+#endif
 #include <string>
 using std::string;
 
