@@ -7,10 +7,10 @@ It is based on the work done by Steve Jones and maintained by Raydelto Hernandez
 ## Current supported platforms:
 
 1. Visual Studio 2019 on Windows.
+1. MinGW builds on Windows.
 
 ## Platforms to be supported in the future:
 1. Visual Studio 2022 on Windows.
-1. MinGW builds on Windows.
 1. GNU/Linux.
 1. MacOS.
 1. Android.

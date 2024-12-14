@@ -6,7 +6,7 @@ LIBS = -L. \
 	  -lopengl32 \
 	  -lgdi32
 
-INCLUDES = -I./common/mingw32/includes -I./headers
+INCLUDES = -I./common/includes -I./headers
 
 SRC = src/Texture2D.cpp \
 	src/ShaderProgram.cpp \
