@@ -1,4 +1,7 @@
 UNAME_S := $(shell uname -s)
+
+all: main.exe
+
 LIBS = -L. \
 	   -L./common/mingw32/lib \
       -lglew32 \
@@ -8,14 +11,18 @@ LIBS = -L. \
 
 INCLUDES = -I./common/includes -I./headers
 
-OBJ = Texture2D.o \
+OBJ = stb_image.o \
+ 	Texture2D.o \
 	ShaderProgram.o \
 	Mesh.o \
 	Camera.o
 
-WARNINGS=-w
+WARNINGS=-Wall
 
 FLAGS=-std=c++17
+
+stb_image.o: third-party-source-code/stb_image.cpp
+	g++ -c third-party-source-code/stb_image.cpp $(INCLUDES) $(FLAGS)
 
 ifeq ($(UNAME_S),Darwin)
 FRAMEWORKS=-framework OpenGL
@@ -44,8 +51,6 @@ clean:
 	rm -f *.o
 	rm -f main
 else
-
-all: main.exe
 
 main.exe: src/main.cpp $(OBJ)
 	g++ src/main.cpp $(OBJ) $(LIBS) $(INCLUDES) -o main.exe $(WARNINGS) $(FLAGS)
