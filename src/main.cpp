@@ -65,16 +65,15 @@ int main()
 	Mesh mesh[numModels];
 	Texture2D texture[numModels];
 
-	mesh[0].loadOBJ("models/crate.obj");
-	mesh[1].loadOBJ("models/woodcrate.obj");
-	mesh[2].loadOBJ("models/robot.obj");
-	mesh[3].loadOBJ("models/floor.obj");
-	
-	texture[0].loadTexture("textures/crate.jpg", true);
-	texture[1].loadTexture("textures/woodcrate_diffuse.jpg", true);
-	texture[2].loadTexture("textures/robot_diffuse.jpg", true);
-	texture[3].loadTexture("textures/tile_floor.jpg", true);
-	
+	std::string objs[] = { "models/crate.obj", "models/woodcrate.obj", "models/robot.obj", "models/floor.obj" };
+	std::string textures[] = { "textures/crate.jpg", "textures/woodcrate_diffuse.jpg", "textures/robot_diffuse.jpg", "textures/tile_floor.jpg" };
+
+	for(int i = 0; i < numModels; i++)
+	{
+		mesh[i].loadOBJ(objs[i]);
+		texture[i].loadTexture(textures[i]);
+	}
+
 	// Model positions
 	glm::vec3 modelPos[] = {
 		glm::vec3(-2.5f, 1.0f, 0.0f),	// crate1
